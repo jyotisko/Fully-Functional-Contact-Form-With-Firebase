@@ -1,59 +1,43 @@
-// Initialize Firebase (ADD YOUR OWN DATA)
-var config = {
-  apiKey: "xxxxx",
-  authDomain: "xxxxx",
-  databaseURL: "xxxxx",
-  projectId: "xxxxx",
-  storageBucket: "xxxxx",
-  messagingSenderId: "xxxxx"
-};
-firebase.initializeApp(config);
+// db.collection('contact').get().then(snapshot => {
+//   snapshot.docs.forEach(doc => {
+//     console.log(doc.data());
+//   });
+// });
 
-// Reference messages collection
-var messagesRef = firebase.database().ref('messages');
+const form = document.querySelector('#contactForm');
 
-// Listen for form submit
-document.getElementById('contactForm').addEventListener('submit', submitForm);
-
-// Submit form
-function submitForm(e){
-  e.preventDefault();
-
-  // Get values
-  var name = getInputVal('name');
-  var company = getInputVal('company');
-  var email = getInputVal('email');
-  var phone = getInputVal('phone');
-  var message = getInputVal('message');
-
-  // Save message
-  saveMessage(name, company, email, phone, message);
-
-  // Show alert
-  document.querySelector('.alert').style.display = 'block';
-
-  // Hide alert after 3 seconds
-  setTimeout(function(){
-    document.querySelector('.alert').style.display = 'none';
-  },3000);
-
-  // Clear form
-  document.getElementById('contactForm').reset();
-}
-
-// Function to get get form values
-function getInputVal(id){
-  return document.getElementById(id).value;
-}
-
-// Save message to firebase
-function saveMessage(name, company, email, phone, message){
-  var newMessageRef = messagesRef.push();
-  newMessageRef.set({
+function addData(name, email, phone, company, message) {
+  db.collection('contact').add({
     name: name,
-    company:company,
-    email:email,
-    phone:phone,
-    message:message
-  });
+    email: email,
+    phone: phone,
+    company: company,
+    message: message
+  })
+    .then(_ => swal({
+      title: 'Thanks For Contacting Us!',
+      text: 'We will reach to you as soon as possible',
+      icon: 'success'
+    }))
 }
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = form.name.value;
+  const company = form.company.value;
+  const email = form.email.value;
+  const phone = form.phone.value;
+  const message = form.message.value;
+  addData(name, email, phone, company, message);
+  [form.name, form.company, form.email, form.phone, form.message].forEach(el => el.value = '');
+});
+
+function sendMail() {
+  var link = 'mailto:hello@domain.com?subject=Message from Me&body=Hello;'
+  window.location.href = link;
+}
+
+sendMail();
+
+
+

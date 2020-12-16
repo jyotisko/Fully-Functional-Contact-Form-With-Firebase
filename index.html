@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Acme Web Design</title>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
 <body>
   <div class="container">
     <h1 class="brand"><span>Acme</span> Web Design</h1>
@@ -24,10 +30,10 @@
       <div class="contact">
         <h3>Email Us</h3>
         <div class="alert">Your message has been sent</div>
-        <form id="contactForm">
+        <form id="contactForm" autocomplete="off">
           <p>
             <label>Name</label>
-            <input type="text" name="name" id="name" required>
+            <input autofocus type="text" name="name" id="name" required>
           </p>
           <p>
             <label>Company</label>
@@ -43,7 +49,7 @@
           </p>
           <p class="full">
             <label>Message</label>
-            <textarea name="message" rows="5" id="message"></textarea>
+            <textarea style="resize: vertical;" name="message" rows="5" id="message" required></textarea>
           </p>
           <p class="full">
             <button type="submit">Submit</button>
@@ -53,7 +59,20 @@
     </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCokVQ9_h39ajfmFu_rbtxcszaq8t7lOgk",
+      authDomain: "firebasics-d8f71.firebaseapp.com",
+      projectId: "firebasics-d8f71",
+      storageBucket: "firebasics-d8f71.appspot.com",
+      messagingSenderId: "444870867583",
+      appId: "1:444870867583:web:38a7066e498d7b24eddd4a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+  </script>
   <script src="main.js"></script>
 </body>
+
 </html>
