@@ -32,12 +32,6 @@ form.addEventListener('submit', e => {
   [form.name, form.company, form.email, form.phone, form.message].forEach(el => el.value = '');
 });
 
-function sendMail() {
-  var link = 'mailto:hello@domain.com?subject=Message from Me&body=Hello;'
-  window.location.href = link;
-}
-
-sendMail();
 
 
 
